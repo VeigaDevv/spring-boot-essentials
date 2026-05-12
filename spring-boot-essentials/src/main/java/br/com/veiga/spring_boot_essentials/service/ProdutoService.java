@@ -75,4 +75,8 @@ public class ProdutoService {
     }
 
 
+    public void removeProduct(Integer id) {
+        PRODUTOS.removeIf(p -> p.getId().equals(id));
+    }
+
 }
