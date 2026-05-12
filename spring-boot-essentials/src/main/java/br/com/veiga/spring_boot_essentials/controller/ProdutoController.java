@@ -2,6 +2,7 @@ package br.com.veiga.spring_boot_essentials.controller;
 
 import br.com.veiga.spring_boot_essentials.database.model.ProdutoEntity;
 import br.com.veiga.spring_boot_essentials.dto.ProdutoDTO;
+import br.com.veiga.spring_boot_essentials.exception.NotFoundException;
 import br.com.veiga.spring_boot_essentials.service.ProdutoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,7 @@ public class ProdutoController {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.CREATED)
-    public ProdutoEntity update(@PathVariable Integer id, @RequestBody ProdutoDTO produtoDTO) {
+    public ProdutoEntity update(@PathVariable Integer id, @RequestBody ProdutoDTO produtoDTO) throws NotFoundException {
         return produtoService.updateProduct(produtoDTO, id);
     }
 

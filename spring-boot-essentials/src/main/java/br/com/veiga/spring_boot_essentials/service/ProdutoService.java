@@ -2,6 +2,7 @@ package br.com.veiga.spring_boot_essentials.service;
 
 import br.com.veiga.spring_boot_essentials.database.model.ProdutoEntity;
 import br.com.veiga.spring_boot_essentials.dto.ProdutoDTO;
+import br.com.veiga.spring_boot_essentials.exception.NotFoundException;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -61,12 +62,12 @@ public class ProdutoService {
     }
 
 
-    public ProdutoEntity updateProduct(ProdutoDTO produtoDTO, Integer id) {
+    public ProdutoEntity updateProduct(ProdutoDTO produtoDTO, Integer id) throws NotFoundException {
 
         ProdutoEntity produto = PRODUTOS.stream()
                 .filter(p -> p.getId().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado."));
+                .orElseThrow(() -> new NotFoundException("Produto não encontrado."));
 
         produto.setNome(produtoDTO.getNome());
         produto.setPreco(produtoDTO.getPreco());
