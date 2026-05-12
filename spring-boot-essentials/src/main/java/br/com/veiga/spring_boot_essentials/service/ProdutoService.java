@@ -35,9 +35,11 @@ public class ProdutoService {
                                 .build());
             };
 
+
     public List<ProdutoEntity> findAll() {
         return new ArrayList<>(PRODUTOS);
     }
+
 
     public ProdutoEntity createProduct(ProdutoDTO produtoDTO) {
 
@@ -57,4 +59,20 @@ public class ProdutoService {
 
         return newProduto;
     }
+
+
+    public ProdutoEntity updateProduct(ProdutoDTO produtoDTO, Integer id) {
+
+        ProdutoEntity produto = PRODUTOS.stream()
+                .filter(p -> p.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado."));
+
+        produto.setNome(produtoDTO.getNome());
+        produto.setPreco(produtoDTO.getPreco());
+        produto.setQuantidade(produtoDTO.getQuantidade());
+        return produto;
+    }
+
+
 }
